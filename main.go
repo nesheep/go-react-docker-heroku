@@ -42,7 +42,7 @@ func run(ctx context.Context) error {
 	log.Printf("start with: %v", url)
 	log.Printf("env: %v", cfg.Env)
 
-	r := server.NewRouter(http.FS(html))
+	r := server.NewRouter(cfg, http.FS(html))
 	s := server.NewServer(r, l)
 
 	return s.Run(ctx)
