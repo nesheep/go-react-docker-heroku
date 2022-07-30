@@ -1,3 +1,7 @@
+setup:
+  config:
+    APP_ENV: prod
+
 build:
   docker:
     web: Dockerfile.production

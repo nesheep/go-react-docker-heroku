@@ -40,6 +40,7 @@ func run(ctx context.Context) error {
 
 	url := fmt.Sprintf("http://%s", l.Addr().String())
 	log.Printf("start with: %v", url)
+	log.Printf("env: %v", cfg.Env)
 
 	r := server.NewRouter(http.FS(html))
 	s := server.NewServer(r, l)
