@@ -3,7 +3,8 @@ version: "3.9"
 services:
   app:
     image: go-react
-    build: ./DockerfileDev
+    build:
+      dockerfile: ./Dockerfile.development
     environment:
       APP_ENV: dev
       PORT: 8080
