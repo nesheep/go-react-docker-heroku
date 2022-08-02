@@ -20,12 +20,12 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . .
-COPY --from=frontend /app/build/ ./frontend/build/
+COPY --from=frontend /app/build ./frontend/build
 RUN go build -trimpath -ldflags "-w -s" -o app
 
 # -------------------------------------------------
 
-FROM gcr.io/distroless/base-debian11 AS production
+FROM debian:bullseye-slim AS production
 
-COPY --from=builder /app/app .
+COPY --from=builder /app/app ./
 CMD ["./app"]
