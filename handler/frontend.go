@@ -10,19 +10,19 @@ import (
 	"path/filepath"
 )
 
-type FrontEnd struct {
+type Frontend struct {
 	assets embed.FS
 	prefix string
 }
 
-func NewFrontend(assets embed.FS, prefix string) *FrontEnd {
-	return &FrontEnd{
+func NewFrontend(assets embed.FS, prefix string) *Frontend {
+	return &Frontend{
 		assets: assets,
 		prefix: prefix,
 	}
 }
 
-func (f *FrontEnd) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (f *Frontend) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	err := f.tryRead(r.URL.Path, w)
 	if err == nil {
 		return
@@ -34,7 +34,7 @@ func (f *FrontEnd) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (f *FrontEnd) tryRead(requestPath string, w http.ResponseWriter) error {
+func (f *Frontend) tryRead(requestPath string, w http.ResponseWriter) error {
 	file, err := f.assets.Open(path.Join(f.prefix, requestPath))
 	if err != nil {
 		return err
