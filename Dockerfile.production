@@ -21,7 +21,7 @@ RUN go mod download
 
 COPY . .
 COPY --from=frontend /app/build ./frontend/build
-RUN go build -trimpath -ldflags "-w -s" -o app
+RUN go build -trimpath -ldflags "-w -s" -o app ./cmd/main.go
 
 # -------------------------------------------------
 

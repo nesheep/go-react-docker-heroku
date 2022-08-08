@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"embed"
 	"fmt"
 	"log"
 	"net"
@@ -10,9 +9,6 @@ import (
 	"github.com/nesheep/go-react-docker-heroku/config"
 	"github.com/nesheep/go-react-docker-heroku/server"
 )
-
-//go:embed frontend/build/*
-var assets embed.FS
 
 func main() {
 	if err := run(context.Background()); err != nil {
@@ -34,7 +30,7 @@ func run(ctx context.Context) error {
 	url := fmt.Sprintf("http://%s", l.Addr().String())
 	log.Printf("start with: %v", url)
 
-	r := server.NewRouter(cfg, assets)
+	r := server.NewRouter(cfg)
 	s := server.NewServer(r, l)
 
 	return s.Run(ctx)

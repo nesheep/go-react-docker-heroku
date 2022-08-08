@@ -12,10 +12,14 @@ import (
 
 type FrontEnd struct {
 	assets embed.FS
+	prefix string
 }
 
-func NewFrontend(assets embed.FS) *FrontEnd {
-	return &FrontEnd{assets: assets}
+func NewFrontend(assets embed.FS, prefix string) *FrontEnd {
+	return &FrontEnd{
+		assets: assets,
+		prefix: prefix,
+	}
 }
 
 func (f *FrontEnd) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -31,7 +35,7 @@ func (f *FrontEnd) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (f *FrontEnd) tryRead(requestPath string, w http.ResponseWriter) error {
-	file, err := f.assets.Open(path.Join("frontend/build", requestPath))
+	file, err := f.assets.Open(path.Join(f.prefix, requestPath))
 	if err != nil {
 		return err
 	}
