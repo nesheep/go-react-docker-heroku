@@ -17,7 +17,7 @@ type helloRsp struct {
 	Message string `json:"message"`
 }
 
-func (hh *Hello) Get(w http.ResponseWriter, r *http.Request) {
+func (h *Hello) Get(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	name := chi.URLParam(r, "name")
 	rsp := helloRsp{Message: fmt.Sprintf("Hello, %v!", name)}
