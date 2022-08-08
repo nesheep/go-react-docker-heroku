@@ -21,9 +21,9 @@ func NewRouter(cfg *config.Config, html http.FileSystem) http.Handler {
 		}))
 	}
 
-	hh := handler.NewHelloHander()
+	h := handler.NewHello()
 	r.Get("/*", http.FileServer(html).ServeHTTP)
-	r.Get("/hello/{name}", hh.Hello)
+	r.Get("/hello/{name}", h.Get)
 
 	return r
 }

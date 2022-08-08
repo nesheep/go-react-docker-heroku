@@ -7,17 +7,17 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-type HelloHandler struct{}
+type Hello struct{}
 
-func NewHelloHander() *HelloHandler {
-	return &HelloHandler{}
+func NewHello() *Hello {
+	return &Hello{}
 }
 
 type helloRsp struct {
 	Message string `json:"message"`
 }
 
-func (hh *HelloHandler) Hello(w http.ResponseWriter, r *http.Request) {
+func (hh *Hello) Get(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	name := chi.URLParam(r, "name")
 	rsp := helloRsp{Message: fmt.Sprintf("Hello, %v!", name)}
